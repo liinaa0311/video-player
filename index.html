@@ -8,27 +8,28 @@
     * {
       box-sizing: border-box;
     }
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
       background-color: #000;
       font-family: sans-serif;
       color: white;
+      width: 100%;
+      overflow-x: hidden;
     }
     .container {
       display: flex;
       flex-direction: column;
-      align-items: center;
       gap: 40px;
-      padding: 20px 0;
+      width: 100vw;
     }
     .video-section {
-      width: 100%;
-      padding: 0 16px; /* 여백만 최소로 */
+      width: 100vw;
     }
     .video-wrapper {
       position: relative;
       width: 100%;
-      padding-top: 177.77%; /* 9:16 비율 유지 */
+      padding-top: 177.77%; /* 9:16 비율 */
       background: #000;
       overflow: hidden;
     }
@@ -70,14 +71,16 @@
   </div>
 
   <script>
-    // 동시에 한 개만 재생되도록 설정
+    // 동시에 하나만 재생되도록 설정
     const iframes = document.querySelectorAll("iframe");
 
     iframes.forEach((frame, idx) => {
       frame.addEventListener("mouseenter", () => {
         iframes.forEach((other, otherIdx) => {
           if (idx !== otherIdx) {
-            other.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            other.contentWindow.postMessage(
+              '{"event":"command","func":"pauseVideo","args":""}', '*'
+            );
           }
         });
       });
