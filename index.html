@@ -28,24 +28,26 @@
     .video-wrapper {
       position: relative;
       width: 100%;
-      aspect-ratio: 9 / 16;
+      padding-top: 177.77%; /* 9:16 비율 유지 */
       background: #000;
       overflow: hidden;
     }
-    iframe {
+    iframe,
+    .thumbnail {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       border: none;
+      object-fit: cover;
+    }
+    iframe {
       display: none;
     }
     .thumbnail {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
       cursor: pointer;
-      top: 0;
-      left: 0;
+      z-index: 2;
     }
     h2 {
       margin: 0 0 10px;
@@ -85,16 +87,11 @@
 
     thumbnails.forEach((thumb, idx) => {
       thumb.addEventListener("click", () => {
-        // 모든 썸네일 보이게, iframe 숨기고 pause
+        // 모든 썸네일 보이고 iframe 숨기기
         thumbnails.forEach(t => t.style.display = "block");
-        iframes.forEach((frame, i) => {
-          frame.style.display = "none";
-          if (i !== idx) {
-            frame.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-          }
-        });
+        iframes.forEach(f => f.style.display = "none");
 
-        // 선택한 영상만 보여주고 썸네일 숨김
+        // 현재 선택된 iframe만 보여주고 썸네일 숨기기
         iframes[idx].style.display = "block";
         thumb.style.display = "none";
       });
