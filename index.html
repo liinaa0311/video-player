@@ -26,39 +26,20 @@
       font-size: 18px;
       text-align: center;
     }
-
-    /* 기본: 모바일용 */
-    .video-cropper {
-      position: relative;
+    .video-wrapper {
       width: 100%;
       max-height: 90vh;
-      aspect-ratio: 9 / 16;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       overflow: hidden;
       background: #000;
     }
-    .video-cropper iframe {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      height: 100%;
-      transform: translateX(-50%);
+    iframe {
+      height: 90vh;
       width: auto;
-      min-width: 100%;
+      max-width: 100%;
       border: none;
-    }
-
-    /* PC 전용 스타일 */
-    @media (min-width: 768px) {
-      .video-cropper {
-        overflow: visible; /* 좌우 자르지 않음 */
-      }
-      .video-cropper iframe {
-        position: static;
-        transform: none;
-        width: 100%;
-        height: auto;
-        aspect-ratio: 9 / 16;
-      }
     }
   </style>
 </head>
@@ -66,19 +47,19 @@
   <div class="container">
     <div class="video-section">
       <h2>4방향 파워스트레치</h2>
-      <div class="video-cropper">
+      <div class="video-wrapper">
         <iframe src="https://drive.google.com/file/d/1ZDcOOnMm88_ThCeJyVxMtgtQ9Prubt2l/preview" allow="autoplay" allowfullscreen></iframe>
       </div>
     </div>
     <div class="video-section">
       <h2>친환경 발수가공</h2>
-      <div class="video-cropper">
+      <div class="video-wrapper">
         <iframe src="https://drive.google.com/file/d/1Yb16AfIQgnNmYm0bwu-3Mdb8lqygqRMo/preview" allow="autoplay" allowfullscreen></iframe>
       </div>
     </div>
     <div class="video-section">
       <h2>링클프리 효과</h2>
-      <div class="video-cropper">
+      <div class="video-wrapper">
         <iframe src="https://drive.google.com/file/d/1Hkk3tbiXE2G1FXck21CdwNVuXPD0z_V5/preview" allow="autoplay" allowfullscreen></iframe>
       </div>
     </div>
