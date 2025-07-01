@@ -28,26 +28,17 @@
     .video-wrapper {
       position: relative;
       width: 100%;
-      padding-top: 177.77%; /* 9:16 비율 유지 */
+      padding-top: 177.77%; /* 9:16 비율 */
       background: #000;
       overflow: hidden;
     }
-    iframe,
-    .thumbnail {
+    iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       border: none;
-      object-fit: cover;
-    }
-    iframe {
-      display: none;
-    }
-    .thumbnail {
-      cursor: pointer;
-      z-index: 2;
     }
     h2 {
       margin: 0 0 10px;
@@ -61,39 +52,34 @@
     <div class="video-section">
       <h2>4방향 파워스트레치</h2>
       <div class="video-wrapper">
-        <img class="thumbnail" src="1.4방향스트레치_01.jpg" data-index="0" alt="썸네일1">
-        <iframe src="https://drive.google.com/file/d/1ZDcOOnMm88_ThCeJyVxMtgtQ9Prubt2l/preview" allow="autoplay" allowfullscreen></iframe>
+        <iframe src="https://drive.google.com/file/d/1ZDcOOnMm88_ThCeJyVxMtgtQ9Prubt2l/preview?autoplay=0" allow="autoplay" allowfullscreen></iframe>
       </div>
     </div>
     <div class="video-section">
       <h2>친환경 발수가공</h2>
       <div class="video-wrapper">
-        <img class="thumbnail" src="20250701_153702_403.jpg" data-index="1" alt="썸네일2">
-        <iframe src="https://drive.google.com/file/d/1Yb16AfIQgnNmYm0bwu-3Mdb8lqygqRMo/preview" allow="autoplay" allowfullscreen></iframe>
+        <iframe src="https://drive.google.com/file/d/1Yb16AfIQgnNmYm0bwu-3Mdb8lqygqRMo/preview?autoplay=0" allow="autoplay" allowfullscreen></iframe>
       </div>
     </div>
     <div class="video-section">
       <h2>링클프리 효과</h2>
       <div class="video-wrapper">
-        <img class="thumbnail" src="4.링클프리_07.jpg" data-index="2" alt="썸네일3">
-        <iframe src="https://drive.google.com/file/d/1Hkk3tbiXE2G1FXck21CdwNVuXPD0z_V5/preview" allow="autoplay" allowfullscreen></iframe>
+        <iframe src="https://drive.google.com/file/d/1Hkk3tbiXE2G1FXck21CdwNVuXPD0z_V5/preview?autoplay=0" allow="autoplay" allowfullscreen></iframe>
       </div>
     </div>
   </div>
 
+  <!-- 영상 한 개만 재생되도록 시도 -->
   <script>
-    const thumbnails = document.querySelectorAll(".thumbnail");
     const iframes = document.querySelectorAll("iframe");
 
-    thumbnails.forEach((thumb, idx) => {
-      thumb.addEventListener("click", () => {
-        // 모든 썸네일 보이고 iframe 숨기기
-        thumbnails.forEach(t => t.style.display = "block");
-        iframes.forEach(f => f.style.display = "none");
-
-        // 현재 선택된 iframe만 보여주고 썸네일 숨기기
-        iframes[idx].style.display = "block";
-        thumb.style.display = "none";
+    iframes.forEach((frame, idx) => {
+      frame.addEventListener("mouseenter", () => {
+        iframes.forEach((other, otherIdx) => {
+          if (idx !== otherIdx) {
+            other.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+          }
+        });
       });
     });
   </script>
