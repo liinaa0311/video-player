@@ -4,18 +4,12 @@
   <meta charset="UTF-8">
   <title>IVY Stretching Series</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background-color: #000;
       color: #fff;
       font-family: sans-serif;
     }
-
     .video-wrapper {
       width: 100vw;
       height: 100vh;
@@ -24,13 +18,11 @@
       justify-content: center;
       align-items: center;
     }
-
     h2 {
       margin-bottom: 10px;
       font-size: 1.5rem;
       color: #fff;
     }
-
     iframe {
       width: auto;
       height: 100vh;
@@ -46,8 +38,7 @@
     <h2>4방향 파워스트레치</h2>
     <iframe 
       src="https://drive.google.com/file/d/1ZDcOOnMm88_ThCeJyVxMtgtQ9Prubt2l/preview" 
-      allow="autoplay" 
-      allowfullscreen>
+      allow="autoplay" allowfullscreen>
     </iframe>
   </div>
 
@@ -55,8 +46,7 @@
     <h2>친환경 발수가공</h2>
     <iframe 
       src="https://drive.google.com/file/d/1Yb16AfIQgnNmYm0bwu-3Mdb8lqygqRMo/preview" 
-      allow="autoplay" 
-      allowfullscreen>
+      allow="autoplay" allowfullscreen>
     </iframe>
   </div>
 
@@ -64,10 +54,24 @@
     <h2>링클프리 효과</h2>
     <iframe 
       src="https://drive.google.com/file/d/1Hkk3tbiXE2G1FXck21CdwNVuXPD0z_V5/preview" 
-      allow="autoplay" 
-      allowfullscreen>
+      allow="autoplay" allowfullscreen>
     </iframe>
   </div>
 
+  <script>
+    const iframes = document.querySelectorAll("iframe");
+
+    window.addEventListener("message", (event) => {
+      // Drive iframe 메시지만 처리
+      if (event.origin !== "https://drive.google.com") return;
+
+      iframes.forEach((iframe) => {
+        // 재생된 iframe이 아닌 다른 것만 일시정지 명령 전달
+        if (event.source !== iframe.contentWindow) {
+          iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
