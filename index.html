@@ -23,12 +23,12 @@
     }
     .video-section {
       width: 100%;
-      max-width: 430px;
+      padding: 0 16px; /* 여백만 최소로 */
     }
     .video-wrapper {
       position: relative;
       width: 100%;
-      padding-top: 177.77%; /* 9:16 비율 */
+      padding-top: 177.77%; /* 9:16 비율 유지 */
       background: #000;
       overflow: hidden;
     }
@@ -69,8 +69,8 @@
     </div>
   </div>
 
-  <!-- 영상 한 개만 재생되도록 시도 -->
   <script>
+    // 동시에 한 개만 재생되도록 설정
     const iframes = document.querySelectorAll("iframe");
 
     iframes.forEach((frame, idx) => {
